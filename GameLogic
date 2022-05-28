@@ -14,12 +14,16 @@ class Balance:
         self.balance=balance
 
     def bet(self,bet_amount):
-        if bet_amount<self.balance:
-            self.balance=self.balance-bet_amount
-            print("Remaining balance: ", self.balance)
-        else:
-            print("Insufficent Balance")
-        return self.balance
+        betting=True
+        while betting:
+            if bet_amount<=self.balance:
+                self.balance=self.balance-bet_amount
+                print("Remaining balance: ", self.balance)
+            else:
+                print("Insufficent Balance")
+                print("Restart Game and set a betting amount less than or equal to your balance!!!!")
+                quit()
+            return self.balance
 
     def __str__(self):
         print("Balance: $", self.balance)
@@ -129,6 +133,7 @@ def game_logic():
                                 player_cards.remove(11)
                                 player_cards.append(1)
                                 eleven=False
+
 
                         elif sum(player_cards)>21:
                             print("Player: ",player_cards)
@@ -310,6 +315,8 @@ def game_logic():
                                     if input("Would you like to continue playing? y or n")=='y':
                                         player_cards.clear()
                                         banker_cards.clear()
+                                        banker_17=False
+                                        game_22=False
                                     else:
                                         print("Total wins: ",wins)
                                         print("Total losses: ",losses)
@@ -325,6 +332,8 @@ def game_logic():
                                     if input("Would you like to continue playing? y or n")=='y':
                                         player_cards.clear()
                                         banker_cards.clear()
+                                        banker_17=False
+                                        game_22=False
                                     else:
                                         print("Total wins: ",wins)
                                         print("Total losses: ",losses)
@@ -339,6 +348,8 @@ def game_logic():
                                     if input("Would you like to continue playing? y or n")=='y':
                                         player_cards.clear()
                                         banker_cards.clear()
+                                        banker_17=False
+                                        game_22=False
                                     else:
                                         print("Total wins: ",wins)
                                         print("Total losses: ",losses)
@@ -353,6 +364,8 @@ def game_logic():
                                 if input("Would you like to continue playing? y or n")=='y':
                                         player_cards.clear()
                                         banker_cards.clear()
+                                        banker_17=False
+                                        game_22=False
                                 else:
                                     print("Total wins: ",wins)
                                     print("Total losses: ",losses)
@@ -364,7 +377,6 @@ def game_logic():
                     quit()
 
                 else:
-
                         if len(player_cards)==0 and len(banker_cards)==0:
                             player_cards.append(deck.pop())
                             banker_cards.append(deck.pop())
@@ -386,6 +398,7 @@ def game_logic():
                                         player_cards.clear()
                                         banker_cards.clear()
                                         nohit=False
+                                        gameon=False
                                     else:
                                         print("Total wins: ",wins)
                                         print("Total losses: ",losses)
@@ -402,6 +415,7 @@ def game_logic():
                                             player_cards.clear()
                                             banker_cards.clear()
                                             nohit=False
+                                            gameon=False
                                         else:
                                             print("Total wins: ",wins)
                                             print("Total losses: ",losses)
@@ -417,6 +431,7 @@ def game_logic():
                                         player_cards.clear()
                                         banker_cards.clear()
                                         nohit=False
+                                        gameon=False
                                     else:
                                         print("Total wins: ",wins)
                                         print("Total losses: ",losses)
@@ -440,12 +455,12 @@ def game_logic():
                                             print("You Lose!")
                                             print("Remaining Balance:",game.balance)
                                             losses=losses+1
-
                                             if input("Would you like to continue playing? y or n")=='y':
                                                 player_cards.clear()
                                                 banker_cards.clear()
                                                 banker_17=False
                                                 nohit=False
+                                                gameon=False
                                             else:
                                                 print("Total wins: ",wins)
                                                 print("Total losses: ",losses)
@@ -463,6 +478,7 @@ def game_logic():
                                                 banker_cards.clear()
                                                 banker_17=False
                                                 nohit=False
+                                                gameon=False
                                             else:
                                                 print("Total wins: ",wins)
                                                 print("Total losses: ",losses)
@@ -479,6 +495,7 @@ def game_logic():
                                                 banker_cards.clear()
                                                 banker_17=False
                                                 nohit=False
+                                                gameon=False
                                             else:
                                                 print("Total wins: ",wins)
                                                 print("Total losses: ",losses)
@@ -497,6 +514,7 @@ def game_logic():
                                             banker_cards.clear()
                                             banker_17=False
                                             nohit=False
+                                            gameon=False
                                         else:
                                             print("Total wins: ",wins)
                                             print("Total losses: ",losses)
