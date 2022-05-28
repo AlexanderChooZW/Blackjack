@@ -6,8 +6,6 @@ print("2)Blackjack pays 3:2")
 print("3)Win pays 1:1")
 print("4)Have fun :)")
 
-
-
 class Balance:
     def __init__(self,player,balance):
         self.player=player
@@ -144,6 +142,7 @@ def game_logic():
                                 banker_cards.clear()
                                 hitting=False
                                 gameon=False
+                                losses=losses+1
                             else:
                                 print("Total wins: ",wins)
                                 print("Total losses: ",losses)
