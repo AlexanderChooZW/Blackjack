@@ -1,5 +1,12 @@
 player=input("Hi! Welcome to Alex's Blackjack Casino. What is your name?")
 capital=int(input("How much do you have to play today?"))
+print("The rules are:")
+print("1)Dealer to stand on 17")
+print("2)Blackjack pays 3:2")
+print("3)Win pays 1:1")
+print("4)Have fun :)")
+
+
 
 class Balance:
     def __init__(self,player,balance):
@@ -64,7 +71,7 @@ def game_logic():
             print("Player: ", player_cards)
             print("Banker: ", banker_cards)
             print("BlackJack! Player wins!")
-            game.win(betamount*2)
+            game.win(betamount*2.5)
             print("Remaining Balance:",game.balance)
             wins=wins+1
             if input("Would you like to continue playing? y or n")=='y':
