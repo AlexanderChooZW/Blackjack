@@ -8,207 +8,357 @@ deck=[2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,1
 
 
 def game_logic():
+    playing=True
+    while playing:
+        if len(player_cards)==0 and len(banker_cards)==0:
+                    player_cards.append(deck.pop())
+                    banker_cards.append(deck.pop())
+                    player_cards.append(deck.pop())
+                    banker_cards.append(deck.pop())
 
-    if sum(player_cards)==21 and sum(banker_cards)==21:
-        print("Player: ", player_cards)
-        print("Banker: ", banker_cards)
-        print("TIE!")
-        #return the orginial bet amount to the capital
+        if sum(player_cards)==21 and sum(banker_cards)==21:
+            print("Player: ", player_cards)
+            print("Banker: ", banker_cards)
+            print("TIE!")
+            if input("Would you like to continue playing? y or n")=='y':
+                player_cards.clear()
+                banker_cards.clear()
 
-    elif sum(player_cards)==21 and sum(banker_cards)!=21:
-        print("Player: ", player_cards)
-        print("Banker: ", banker_cards)
-        print("BlackJack! Player wins!")
-        #return 1.5X the bet amount to the capital account
+            else:
+                quit()
 
-    elif sum(player_cards)!=21 and sum(banker_cards)==21:
-        print("Player: ", player_cards)
-        print("Banker: ", banker_cards)
-        print("BlackJack! You lose")
+        elif sum(player_cards)==21 and sum(banker_cards)!=21:
+            print("Player: ", player_cards)
+            print("Banker: ", banker_cards)
+            print("BlackJack! Player wins!")
+            if input("Would you like to continue playing? y or n")=='y':
 
-    elif sum(player_cards)!=21 and sum(banker_cards)!=21:
-        gameon=True
-        while gameon:
-            if sum(player_cards)==22:
-                player_cards.remove(11)
-                player_cards.append(1)
-            print(player_cards)
-            print(banker_cards[1])
+                player_cards.clear()
+                banker_cards.clear()
 
-            if input("Would you like to hit? y or n")=='y':
-                hitting=True
-                player_cards.append(deck.pop())
-                while hitting:
-                    if 11 in player_cards:
-                        eleven=True
-                        while eleven:
-                            player_cards.remove(11)
-                            player_cards.append(1)
-                            eleven=False
+            else:
+                quit()
+
+        elif sum(player_cards)!=21 and sum(banker_cards)==21:
+            print("Player: ", player_cards)
+            print("Banker: ", banker_cards)
+            print("BlackJack! You lose")
+            if input("Would you like to continue playing? y or n")=='y':
+
+                player_cards.clear()
+                banker_cards.clear()
+
+            else:
+                quit()
+
+        elif sum(player_cards)!=21 and sum(banker_cards)!=21:
+            gameon=True
+            while gameon:
+                if len(player_cards)==0 and len(banker_cards)==0:
+                    player_cards.append(deck.pop())
+                    banker_cards.append(deck.pop())
+                    player_cards.append(deck.pop())
+                    banker_cards.append(deck.pop())
+
+                elif sum(player_cards)==22:
+                    player_cards.remove(11)
+                    player_cards.append(1)
+
+                print(player_cards)
+                print(banker_cards[1])
+
+                if input("Would you like to hit? y or n")=='y':
+                    hitting=True
+                    player_cards.append(deck.pop())
+                    while hitting:
+                        if 11 in player_cards:
+                            eleven=True
+                            while eleven:
+                                player_cards.remove(11)
+                                player_cards.append(1)
+                                eleven=False
+
+                        elif sum(player_cards)>21:
+
+                            print("Player: ",player_cards)
+                            print("Bust!")
+                            if input("Would you like to continue playing? y or n")=='y':
+                                player_cards.clear()
+                                banker_cards.clear()
+                                hitting=False
+                                gameon=False
+                            else:
+                                quit()
+
+                        elif sum(player_cards)<=21:
+                            print(player_cards)
+                            if input("Would you like to hit? y or n")=='y':
+                                player_cards.append(deck.pop())
+                            else:
+
+                                if sum(banker_cards)>=17:
+                                    if sum(banker_cards)>sum(player_cards):
+                                        print("Player: ", player_cards)
+                                        print("Banker: ", banker_cards)
+                                        print("You lose!")
+                                        if input("Would you like to continue playing? y or no")=='y':
+                                            player_cards.clear()
+                                            banker_cards.clear()
+                                            hitting=False
+                                            gameon=False
+                                        else:
+                                            quit()
 
 
-                    elif sum(player_cards)>21:
+                                    elif sum(banker_cards)<sum(player_cards):
+                                        print("Player: ", player_cards)
+                                        print("Banker: ", banker_cards)
+                                        print("You Win")
+                                        if input("Would you like to continue playing? y or n")=='y':
 
-                        print("Player: ",player_cards)
-                        print("Bust!")
-                        hitting=False
-                        gameon=False
+                                            player_cards.clear()
+                                            banker_cards.clear()
+                                            hitting=False
+                                            gameon=False
 
-                    elif sum(player_cards)<=21:
-                        print(player_cards)
-                        if input("Would you like to hit? y or n")=='y':
-                            player_cards.append(deck.pop())
-                        else:
+                                        else:
+                                            quit()
 
-                            if sum(banker_cards)>=17:
+                                    elif sum(banker_cards)==sum(player_cards):
+                                        print("Player: ", player_cards)
+                                        print("Banker: ", banker_cards)
+                                        print("Tie!")
+                                        if input("Would you like to continue playing? y or n")=='y':
+
+                                            player_cards.clear()
+                                            banker_cards.clear()
+                                            hitting=False
+                                            gameon=False
+                                        else:
+                                            quit()
+                                elif sum(banker_cards)<17:
+                                    banker_17=True
+                                    while banker_17:
+                                        if sum(banker_cards)<17:
+                                            banker_cards.append(deck.pop())
+                                            if 11 in banker_cards:
+                                                eleven=True
+                                                while eleven:
+                                                    banker_cards.remove(11)
+                                                    banker_cards.append(1)
+                                                    eleven=False
+
+                                        elif 17<=sum(banker_cards)<=21:
+                                            if sum(banker_cards)>sum(player_cards):
+                                                print("Player: ", player_cards)
+                                                print("Banker: ", banker_cards)
+                                                print("You Lose!")
+                                                if input("Would you like to continue playing? y or n")=='y':
+
+                                                    player_cards.clear()
+                                                    banker_cards.clear()
+                                                    hitting=False
+                                                    gameon=False
+                                                else:
+                                                    quit()
+                                            elif sum(banker_cards)<sum(player_cards):
+                                                print("Player: ", player_cards)
+                                                print("Banker: ", banker_cards)
+                                                print("You Win!")
+                                                if input("Would you like to continue playing? y or n")=='y':
+                                                    player_cards.clear()
+                                                    banker_cards.clear()
+                                                    hitting=False
+                                                    gameon=False
+                                                else:
+                                                    quit()
+                                            elif sum(banker_cards)==sum(player_cards):
+                                                print("Player: ", player_cards)
+                                                print("Banker: ", banker_cards)
+                                                print("Tie!")
+                                                if input("Would you like to continue playing? y or n")=='y':
+
+                                                    player_cards.clear()
+                                                    banker_cards.clear()
+                                                    hitting=False
+                                                    gameon=False
+                                                else:
+                                                        quit()
+
+                                            elif sum(banker_cards)>21:
+                                                print("Player: ", player_cards)
+                                                print("Banker: ", banker_cards)
+                                                print("You Win!")
+                                                if input("Would you like to continue playing? y or n")=='y':
+                                                    player_cards.clear()
+                                                    banker_cards.clear()
+                                                    hitting=False
+                                                    banker_17=False
+                                                    gameon=False
+                                                else:
+                                                    quit()
+
+                elif sum(banker_cards)==22:
+                    game_22=True
+                    while game_22:
+                        banker_cards.remove(11)
+                        banker_cards.append(1)
+                        banker_17=True
+                        while banker_17:
+                            if sum(banker_cards)<17:
+                                banker_cards.append(deck.pop())
+                                if 11 in banker_cards:
+                                    eleven=True
+                                    while eleven:
+                                        banker_cards.remove(11)
+                                        banker_cards.append(1)
+                                        eleven=False
+                            elif 17<=sum(banker_cards)<=21:
                                 if sum(banker_cards)>sum(player_cards):
                                     print("Player: ", player_cards)
                                     print("Banker: ", banker_cards)
-                                    print("You lose!")
-                                    quit()
+                                    print("You Lose!")
+                                    if input("Would you like to continue playing? y or n")=='y':
+                                        player_cards.clear()
+                                        banker_cards.clear()
+                                        banker_17=False
+                                    else:
+                                        quit()
+
                                 elif sum(banker_cards)<sum(player_cards):
+                                    print("Player: ", player_cards)
+                                    print("Banker: ", banker_cards)
+                                    print("You Win!")
+                                    if input("Would you like to continue playing? y or n")=='y':
+                                        player_cards.clear()
+                                        banker_cards.clear()
+                                        banker_17=False
+                                    else:
+                                        quit()
+
+                                else:
+                                    print("Player: ", player_cards)
+                                    print("Banker: ", banker_cards)
+                                    print("Tie!")
+                                    if input("Would you like to continue playing? y or n")=='y':
+                                        player_cards.clear()
+                                        banker_cards.clear()
+                                        banker_17=False
+                                    else:
+                                        quit()
+                            elif sum(banker_cards)>21:
+                                print("Player: ", player_cards)
+                                print("Banker: ", banker_cards)
+                                print("You Win!")
+                                if input("Would you like to continue playing? y or n")=='y':
+                                        player_cards.clear()
+                                        banker_cards.clear()
+                                        banker_17=False
+                                else:
+                                    quit()
+
+                elif len(player_cards)>2:
+                    quit()
+
+                else:
+                    nohit=True
+                    while nohit:
+                        if len(player_cards)==0 and len(banker_cards)==0:
+                            player_cards.append(deck.pop())
+                            banker_cards.append(deck.pop())
+                            player_cards.append(deck.pop())
+                            banker_cards.append(deck.pop())
+
+                        elif sum(banker_cards)>=17:
+                            if sum(banker_cards)>sum(player_cards):
+                                print("Player: ", player_cards)
+                                print("Banker: ", banker_cards)
+                                print("You lose!")
+                                if input("Would you like to continue playing? y or n")=='y':
+                                    player_cards.clear()
+                                    banker_cards.clear()
+                                    nohit=False
+                                else:
+                                    quit()
+
+                            elif sum(banker_cards)<sum(player_cards):
                                     print("Player: ", player_cards)
                                     print("Banker: ", banker_cards)
                                     print("You Win")
                                     quit()
 
-                                elif sum(banker_cards)==sum(player_cards):
-                                    print("Player: ", player_cards)
-                                    print("Banker: ", banker_cards)
-                                    print("Tie!")
+                            elif sum(banker_cards)==sum(player_cards):
+                                print("Player: ", player_cards)
+                                print("Banker: ", banker_cards)
+                                print('TIE!')
+                                if input("Would you like to continue playing? y or n")=='y':
+                                    player_cards.clear()
+                                    banker_cards.clear()
+                                    nohit=False
+                                else:
                                     quit()
-                            elif sum(banker_cards)<17:
-                                banker_17=True
-                                while banker_17:
-                                    if sum(banker_cards)<17:
-                                        banker_cards.append(deck.pop())
 
-                                        if 11 in banker_cards:
-                                            eleven=True
+                        elif sum(banker_cards)<17:
+                            banker_17=True
+                            while banker_17:
+                                if sum(banker_cards)<17:
+                                    banker_cards.append(deck.pop())
+                                    if 11 in banker_cards:
+                                        eleven=True
+                                        while eleven:
+                                            banker_cards.remove(11)
+                                            banker_cards.append(1)
+                                            eleven=False
+                                elif 17<=sum(banker_cards)<=21:
+                                    if sum(banker_cards)>sum(player_cards):
+                                        print("Player: ", player_cards)
+                                        print("Banker: ", banker_cards)
+                                        print("You Lose!")
+                                        if input("Would you like to continue playing? y or n")=='y':
+                                            player_cards.clear()
+                                            banker_cards.clear()
+                                            nohit=False
+                                        else:
+                                            quit()
 
-                                            while eleven:
-                                                banker_cards.remove(11)
-                                                banker_cards.append(1)
-                                                eleven=False
-
-                                    elif 17<=sum(banker_cards)<=21:
-                                        if sum(banker_cards)>sum(player_cards):
-                                            print("Player: ", player_cards)
-                                            print("Banker: ", banker_cards)
-                                            print("You Lose!")
-                                            quit()
-                                        elif sum(banker_cards)<sum(player_cards):
-                                            print("Player: ", player_cards)
-                                            print("Banker: ", banker_cards)
-                                            print("You Win!")
-                                            quit()
-                                        elif sum(banker_cards)==sum(player_cards):
-                                            print("Player: ", player_cards)
-                                            print("Banker: ", banker_cards)
-                                            print("Tie!")
-                                            quit()
-                                    elif sum(banker_cards)>21:
+                                    elif sum(banker_cards)<sum(player_cards):
                                         print("Player: ", player_cards)
                                         print("Banker: ", banker_cards)
                                         print("You Win!")
+                                        if input("Would you like to continue playing? y or n")=='y':
+                                            player_cards.clear()
+                                            banker_cards.clear()
+                                            nohit=False
+                                        else:
+                                            quit()
+
+                                    else:
+                                        print("Player: ", player_cards)
+                                        print("Banker: ", banker_cards)
+                                        print("Tie!")
+                                        if input("Would you like to continue playing? y or n")=='y':
+                                            player_cards.clear()
+                                            banker_cards.clear()
+                                            nohit=False
+                                        else:
+                                            quit()
+
+
+                                elif sum(banker_cards)>21:
+                                    print("Player: ", player_cards)
+                                    print("Banker: ", banker_cards)
+                                    print("You Win!")
+                                    if input("Would you like to continue playing? y or n")=='y':
+                                        player_cards.clear()
+                                        banker_cards.clear()
+                                        nohit=False
+                                    else:
                                         quit()
 
-            elif sum(banker_cards)==22:
-                banker_cards.remove(11)
-                banker_cards.append(1)
-                banker_17=True
-                while banker_17:
-                    if sum(banker_cards)<17:
-                        banker_cards.append(deck.pop())
-                        if 11 in banker_cards:
-                            eleven=True
-                            while eleven:
-                                banker_cards.remove(11)
-                                banker_cards.append(1)
-                                eleven=False
-                    elif 17<=sum(banker_cards)<=21:
-                        if sum(banker_cards)>sum(player_cards):
-                            print("Player: ", player_cards)
-                            print("Banker: ", banker_cards)
-                            print("You Lose!")
-                            quit()
-
-                        elif sum(banker_cards)<sum(player_cards):
-                            print("Player: ", player_cards)
-                            print("Banker: ", banker_cards)
-                            print("You Win!")
-                            quit()
-
-                        else:
-                            print("Player: ", player_cards)
-                            print("Banker: ", banker_cards)
-                            print("Tie!")
-                            quit()
-                    elif sum(banker_cards)>21:
-                        print("Player: ", player_cards)
-                        print("Banker: ", banker_cards)
-                        print("You Win!")
-                        quit()
 
 
 
-            elif len(player_cards)>2:
-                quit()
 
-            else:
-                if sum(banker_cards)>=17:
-                    if sum(banker_cards)>sum(player_cards):
-                        print("Player: ", player_cards)
-                        print("Banker: ", banker_cards)
-                        print("You lose!")
-                        quit()
-
-                    elif sum(banker_cards)<sum(player_cards):
-                            print("Player: ", player_cards)
-                            print("Banker: ", banker_cards)
-                            print("You Win")
-                            quit()
-
-                    elif sum(banker_cards)==sum(player_cards):
-                        print("Player: ", player_cards)
-                        print("Banker: ", banker_cards)
-                        print('TIE!')
-                        quit()
-
-                elif sum(banker_cards)<17:
-                    banker_17=True
-                    while banker_17:
-                        if sum(banker_cards)<17:
-                            banker_cards.append(deck.pop())
-                            if 11 in banker_cards:
-                                eleven=True
-                                while eleven:
-                                    banker_cards.remove(11)
-                                    banker_cards.append(1)
-                                    eleven=False
-                        elif 17<=sum(banker_cards)<=21:
-                            if sum(banker_cards)>sum(player_cards):
-                                print("Player: ", player_cards)
-                                print("Banker: ", banker_cards)
-                                print("You Lose!")
-                                quit()
-
-                            elif sum(banker_cards)<sum(player_cards):
-                                print("Player: ", player_cards)
-                                print("Banker: ", banker_cards)
-                                print("You Win!")
-                                quit()
-
-                            else:
-                                print("Player: ", player_cards)
-                                print("Banker: ", banker_cards)
-                                print("Tie!")
-                                quit()
-                        elif sum(banker_cards)>21:
-                            print("Player: ", player_cards)
-                            print("Banker: ", banker_cards)
-                            print("You Win!")
-                            quit()
 
 random.shuffle(deck)
 player_cards.append(deck.pop())
