@@ -140,12 +140,12 @@ def game_logic():
                             print(f"{player}: ",player_cards)
                             print("Bust!")
                             print("Remaining Balance:",game.balance)
+                            losses=losses+1
                             if input("Would you like to continue playing? y or n")=='y':
                                 player_cards.clear()
                                 banker_cards.clear()
                                 hitting=False
-                                gameon=False
-                                losses=losses+1
+                                gameon=False                               
                             else:
                                 print("Total wins: ",wins)
                                 print("Total losses: ",losses)
@@ -163,7 +163,6 @@ def game_logic():
                                         print("Banker: ", banker_cards)
                                         print("You lose!")
                                         print("Remaining Balance:",game.balance)
-
                                         losses=losses+1
                                         if input("Would you like to continue playing? y or no")=='y':
                                             player_cards.clear()
