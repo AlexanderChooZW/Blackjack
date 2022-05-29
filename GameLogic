@@ -113,6 +113,8 @@ def game_logic():
                 elif sum(player_cards)==22:
                     player_cards.remove(11)
                     player_cards.append(1)
+                    player_cards.remove(11)
+                    player_cards.append(1)
 
                 elif sum(banker_cards)==22:
                     banker_cards.remove(11)
@@ -292,6 +294,8 @@ def game_logic():
                 elif sum(banker_cards)==22:
                     game_22=True
                     while game_22:
+                        banker_cards.remove(11)
+                        banker_cards.append(1)
                         banker_cards.remove(11)
                         banker_cards.append(1)
                         banker_17=True
