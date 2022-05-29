@@ -1,5 +1,5 @@
 player=input("Hi! Welcome to Alex's Blackjack Casino. What is your name?")
-capital=int(input("How much do you have to play today?"))
+capital=int(input(f"{player}, much do you have to play today?"))
 print("The rules are:")
 print("1)Dealer to stand on 17")
 print("2)Blackjack pays 3:2")
@@ -56,7 +56,7 @@ def game_logic():
                     banker_cards.append(deck.pop())
 
         if sum(player_cards)==21 and sum(banker_cards)==21:
-            print("Player: ", player_cards)
+            print(f"{player} :", player_cards)
             print("Banker: ", banker_cards)
             print("TIE!")
             if input("Would you like to continue playing? y or n")=='y':
@@ -70,7 +70,7 @@ def game_logic():
                 quit()
 
         elif sum(player_cards)==21 and sum(banker_cards)!=21:
-            print("Player: ", player_cards)
+            print(f"{player}: ", player_cards)
             print("Banker: ", banker_cards)
             print("BlackJack! Player wins!")
             game.win(betamount*2.5)
@@ -87,7 +87,7 @@ def game_logic():
                 quit()
 
         elif sum(player_cards)!=21 and sum(banker_cards)==21:
-            print("Player: ", player_cards)
+            print(f"{player}: ", player_cards)
             print("Banker: ", banker_cards)
             print("BlackJack! You lose")
             losses=losses+1
@@ -120,7 +120,7 @@ def game_logic():
                     banker_cards.remove(11)
                     banker_cards.append(1)
 
-                print("Player cards ",player_cards)
+                print(f"{player} cards ",player_cards)
                 print("Banker Cards: ",banker_cards[1])
 
                 if input("Would you like to hit? y or n")=='y':
@@ -136,7 +136,7 @@ def game_logic():
 
 
                         elif sum(player_cards)>21:
-                            print("Player: ",player_cards)
+                            print(f"{player}: ",player_cards)
                             print("Bust!")
                             print("Remaining Balance:",game.balance)
                             if input("Would you like to continue playing? y or n")=='y':
@@ -151,14 +151,14 @@ def game_logic():
                                 quit()
 
                         elif sum(player_cards)<=21:
-                            print("Player: ",player_cards)
+                            print(f"{player}: ",player_cards)
                             if input("Would you like to hit? y or n")=='y':
                                 player_cards.append(deck.pop())
                             else:
 
                                 if sum(banker_cards)>=17:
                                     if sum(banker_cards)>sum(player_cards):
-                                        print("Player: ", player_cards)
+                                        print(f"{player}: ", player_cards)
                                         print("Banker: ", banker_cards)
                                         print("You lose!")
                                         print("Remaining Balance:",game.balance)
@@ -176,7 +176,7 @@ def game_logic():
 
 
                                     elif sum(banker_cards)<sum(player_cards):
-                                        print("Player: ", player_cards)
+                                        print(f"{player}: ", player_cards)
                                         print("Banker: ", banker_cards)
                                         print("You Win")
                                         game.win(betamount*2)
@@ -194,7 +194,7 @@ def game_logic():
                                             quit()
 
                                     elif sum(banker_cards)==sum(player_cards):
-                                        print("Player: ", player_cards)
+                                        print(f"{player}: ", player_cards)
                                         print("Banker: ", banker_cards)
                                         print("Tie!")
                                         game.win(betamount)
@@ -222,7 +222,7 @@ def game_logic():
 
                                         elif 17<=sum(banker_cards)<=21:
                                             if sum(banker_cards)>sum(player_cards):
-                                                print("Player: ", player_cards)
+                                                print(f"{player}: ", player_cards)
                                                 print("Banker: ", banker_cards)
                                                 print("You Lose!")
                                                 print("Remaining Balance:",game.balance)
@@ -238,7 +238,7 @@ def game_logic():
                                                     print("Total losses: ",losses)
                                                     quit()
                                             elif sum(banker_cards)<sum(player_cards):
-                                                print("Player: ", player_cards)
+                                                print(f"{player}: ", player_cards)
                                                 print("Banker: ", banker_cards)
                                                 game.win(betamount*2)
                                                 print("You Win!")
@@ -256,7 +256,7 @@ def game_logic():
                                                     print("Total losses: ",losses)
                                                     quit()
                                             elif sum(banker_cards)==sum(player_cards):
-                                                print("Player: ", player_cards)
+                                                print(f"{player}: ", player_cards)
                                                 print("Banker: ", banker_cards)
                                                 print("Tie!")
                                                 game.win(betamount)
@@ -274,7 +274,7 @@ def game_logic():
                                                     quit()
 
                                         elif sum(banker_cards)>21:
-                                            print("Player: ", player_cards)
+                                            print(f"{player}: ", player_cards)
                                             print("Banker: ", banker_cards)
                                             print("You Win!")
                                             game.win(betamount*2)
@@ -310,7 +310,7 @@ def game_logic():
                                         eleven=False
                             elif 17<=sum(banker_cards)<=21:
                                 if sum(banker_cards)>sum(player_cards):
-                                    print("Player: ", player_cards)
+                                    print(f"{player}: ", player_cards)
                                     print("Banker: ", banker_cards)
                                     print("You Lose!")
                                     print("Remaining Balance:",game.balance)
@@ -326,7 +326,7 @@ def game_logic():
                                         quit()
 
                                 elif sum(banker_cards)<sum(player_cards):
-                                    print("Player: ", player_cards)
+                                    print(f"{player}: ", player_cards)
                                     print("Banker: ", banker_cards)
                                     print("You Win!")
                                     game.win(betamount*2)
@@ -343,7 +343,7 @@ def game_logic():
                                         quit()
 
                                 else:
-                                    print("Player: ", player_cards)
+                                    print(f"{player}: ", player_cards)
                                     print("Banker: ", banker_cards)
                                     print("Tie!")
                                     game.win(betamount*1)
@@ -358,7 +358,7 @@ def game_logic():
                                         print("Total losses: ",losses)
                                         quit()
                             elif sum(banker_cards)>21:
-                                print("Player: ", player_cards)
+                                print(f"{player}: ", player_cards)
                                 print("Banker: ", banker_cards)
                                 print("You Win!")
                                 game.win(betamount*2)
@@ -392,7 +392,7 @@ def game_logic():
                             if sum(banker_cards)>=17:
 
                                 if sum(banker_cards)>sum(player_cards):
-                                    print("Player: ", player_cards)
+                                    print(f"{player}: ", player_cards)
                                     print("Banker: ", banker_cards)
                                     print("You lose!")
                                     print("Remaining Balance:",game.balance)
@@ -408,7 +408,7 @@ def game_logic():
                                         quit()
 
                                 elif sum(banker_cards)<sum(player_cards):
-                                        print("Player: ", player_cards)
+                                        print(f"{player}: ", player_cards)
                                         print("Banker: ", banker_cards)
                                         print("You Win")
                                         game.win(betamount*2)
@@ -425,7 +425,7 @@ def game_logic():
                                             quit()
 
                                 elif sum(banker_cards)==sum(player_cards):
-                                    print("Player: ", player_cards)
+                                    print(f"{player}: ", player_cards)
                                     print("Banker: ", banker_cards)
                                     print('TIE!')
                                     game.win(betamount)
@@ -453,7 +453,7 @@ def game_logic():
                                                 eleven=False
                                     elif 17<=sum(banker_cards)<=21:
                                         if sum(banker_cards)>sum(player_cards):
-                                            print("Player: ", player_cards)
+                                            print(f"{player}: ", player_cards)
                                             print("Banker: ", banker_cards)
                                             print("You Lose!")
                                             print("Remaining Balance:",game.balance)
@@ -470,7 +470,7 @@ def game_logic():
                                                 quit()
 
                                         elif sum(banker_cards)<sum(player_cards):
-                                            print("Player: ", player_cards)
+                                            print(f"{player}: ", player_cards)
                                             print("Banker: ", banker_cards)
                                             print("You Win!")
                                             game.win(betamount*2)
@@ -488,7 +488,7 @@ def game_logic():
                                                 quit()
 
                                         else:
-                                            print("Player: ", player_cards)
+                                            print(f"{player}: ", player_cards)
                                             print("Banker: ", banker_cards)
                                             print("Tie!")
                                             game.win(betamount)
@@ -506,7 +506,7 @@ def game_logic():
 
 
                                     elif sum(banker_cards)>21:
-                                        print("Player: ", player_cards)
+                                        print(f"{player}: ", player_cards)
                                         print("Banker: ", banker_cards)
                                         print("You Win!")
                                         game.win(betamount*2)
