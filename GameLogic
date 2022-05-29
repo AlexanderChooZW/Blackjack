@@ -1,4 +1,5 @@
 player=input("Hi! Welcome to Alex's Blackjack Casino. What is your name?")
+print(f"Welcome {player}!")
 capital=int(input(f"{player}, much do you have to play today?"))
 print("The rules are:")
 print("1)Dealer to stand on 17")
